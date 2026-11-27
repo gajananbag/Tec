@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>📘 TEC Assessment – All MCQs</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            background: #f4f7fc;
+            padding: 10px 10px 30px;
+            color: #1e293b;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(145deg, #0b2b4a, #1a4b6d);
+            color: #fff;
+            padding: 18px 16px 16px;
+            border-radius: 18px;
+            margin-bottom: 18px;
+            box-shadow: 0 8px 24px rgba(11, 43, 74, 0.25);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+            line-height: 1.3;
+        }
+        .header h1 span {
+            font-weight: 300;
+            opacity: 0.8;
+            font-size: 14px;
+            display: block;
+            margin-top: 2px;
+        }
+        .header .score-box {
+            background: rgba(255, 255, 255, 0.13);
+            backdrop-filter: blur(4px);
+            padding: 8px 16px;
+            border-radius: 60px;
+            font-size: 15px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            align-self: flex-start;
+            touch-action: manipulation;
+        }
+        .header .score-box span {
+            font-weight: 300;
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        /* ===== SET NAV (horizontally scrollable on mobile) ===== */
+        .set-nav {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 6px;
+            margin-bottom: 18px;
+            background: #fff;
+            padding: 10px 12px;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e9edf4;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e1 #eef2f7;
+        }
+        .set-nav::-webkit-scrollbar {
+            height: 4px;
+        }
+        .set-nav::-webkit-scrollbar-track {
+            background: #eef2f7;
+            border-radius: 8px;
+        }
+        .set-nav::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 8px;
+        }
+        .set-nav button {
+            flex: 0 0 auto;
+            background: #eef2f7;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1e293b;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid transparent;
+            touch-action: manipulation;
+            white-space: nowrap;
+            min-height: 44px;
+            min-width: 56px;
+            text-align: center;
+        }
+        .set-nav button:active {
+            transform: scale(0.96);
+        }
+        .set-nav button.active {
+            background: #1a4b6d;
+            color: #fff;
+            border-color: #1a4b6d;
+            box-shadow: 0 4px 10px rgba(26, 75, 109, 0.25);
+        }
+
+        /* ===== SET SECTIONS ===== */
+        .set-section {
+            display: none;
+            animation: fadeUp 0.3s ease;
+        }
+        .set-section.active {
+            display: block;
+        }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .set-title {
+            font-size: 19px;
+            font-weight: 700;
+            color: #0b2b4a;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .set-title .badge {
+            background: #1a4b6d;
+            color: #fff;
+            font-size: 12px;
+            padding: 2px 14px;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+        .set-sub {
+            color: #475569;
+            font-size: 14px;
+            margin-bottom: 16px;
+            border-left: 4px solid #1a4b6d;
+            padding-left: 14px;
+            background: #f8faff;
+            border-radius: 0 12px 12px 0;
+            line-height: 1.5;
+        }
+
+        /* ===== QUESTION CARD ===== */
+        .q-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 16px 14px;
+            margin-bottom: 14px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e9edf4;
+            transition: 0.15s;
+            touch-action: manipulation;
+        }
+        .q-card.correct {
+            border-left: 6px solid #22c55e;
+            background: #f0fdf4;
+        }
+        .q-card.wrong {
+            border-left: 6px solid #ef4444;
+            background: #fef2f2;
+        }
+
+        .q-card .q-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+        .q-card .q-num {
+            font-weight: 600;
+            color: #1a4b6d;
+            font-size: 13px;
+            background: #e8f0fe;
+            padding: 2px 12px;
+            border-radius: 40px;
+            white-space: nowrap;
+        }
+        .q-card .q-status {
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .q-card .q-status .icon {
+            font-size: 16px;
+        }
+
+        .q-card .q-en {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.5;
+            margin: 4px 0 4px 0;
+            color: #0b2b4a;
+        }
+        .q-card .q-hi {
+            font-size: 14px;
+            color: #475569;
+            background: #f8fafc;
+            padding: 10px 12px;
+            border-radius: 12px;
+            margin: 6px 0 14px 0;
+            border: 1px solid #eef2f7;
+            line-height: 1.6;
+        }
+        .q-card .q-hi::before {
+            content: '🔄 ';
+            font-size: 13px;
+        }
+
+        /* ===== OPTIONS ===== */
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 12px;
+            margin: 10px 0 8px 0;
+        }
+        @media (max-width: 600px) {
+            .options {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
+        .options label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f8fafc;
+            padding: 14px 14px;
+            border-radius: 12px;
+            border: 1px solid #e9edf4;
+            cursor: pointer;
+            transition: 0.15s;
+            font-size: 15px;
+            font-weight: 450;
+            touch-action: manipulation;
+            min-height: 48px;
+        }
+        .options label:active {
+            transform: scale(0.98);
+        }
+        .options input[type="radio"] {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+            accent-color: #1a4b6d;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        .options label.correct-opt {
+            background: #dcfce7;
+            border-color: #22c55e;
+        }
+        .options label.wrong-opt {
+            background: #fee2e2;
+            border-color: #ef4444;
+        }
+        .options label.disabled-opt {
+            opacity: 0.6;
+            cursor: default;
+        }
+        .options label.disabled-opt:active {
+            transform: none;
+        }
+
+        /* ===== ANSWER REVEAL ===== */
+        .q-answer {
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 14px;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            word-break: break-word;
+        }
+        .q-answer.show {
+            display: flex;
+        }
+        .q-answer.correct-ans {
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid #86efac;
+        }
+        .q-answer.wrong-ans {
+            background: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid #fca5a5;
+        }
+        .q-answer .ans-label {
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        /* ===== FOOTER ACTIONS ===== */
+        .footer-actions {
+            margin-top: 26px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .footer-actions button {
+            background: #fff;
+            border: 1px solid #cbd5e1;
+            padding: 12px 18px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #1e293b;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            touch-action: manipulation;
+            flex: 1 1 auto;
+            min-width: 100px;
+            text-align: center;
+            min-height: 48px;
+        }
+        .footer-actions button:active {
+            transform: scale(0.96);
+        }
+        .footer-actions button.primary {
+            background: #1a4b6d;
+            border-color: #1a4b6d;
+            color: #fff;
+        }
+        .footer-actions button.primary:active {
+            background: #0b2b4a;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        /* ===== SCROLL TOP BUTTON ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1a4b6d;
+            color: #fff;
+            border: none;
+            border-radius: 60px;
+            padding: 14px 18px;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(26, 75, 109, 0.35);
+            opacity: 0;
+            transition: 0.3s;
+            pointer-events: none;
+            z-index: 100;
+            touch-action: manipulation;
+            min-height: 52px;
+            min-width: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .scroll-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .scroll-top:active {
+            transform: scale(0.92);
+        }
+
+        /* ===== EXTRA MOBILE TWEAKS ===== */
+        @media (max-width: 480px) {
+            body {
+                padding: 6px 6px 20px;
+            }
+            .header {
+                padding: 14px 12px;
+                border-radius: 14px;
+            }
+            .header h1 {
+                font-size: 18px;
+            }
+            .header .score-box {
+                font-size: 14px;
+                padding: 6px 14px;
+            }
+            .set-nav {
+                padding: 8px 10px;
+                gap: 5px;
+                border-radius: 14px;
+            }
+            .set-nav button {
+                font-size: 12px;
+                padding: 8px 12px;
+                min-height: 40px;
+                min-width: 48px;
+            }
+            .q-card {
+                padding: 14px 12px;
+                border-radius: 14px;
+            }
+            .q-card .q-en {
+                font-size: 15px;
+            }
+            .q-card .q-hi {
+                font-size: 13px;
+                padding: 8px 10px;
+            }
+            .options label {
+                font-size: 14px;
+                padding: 12px 12px;
+                min-height: 44px;
+            }
+            .options input[type="radio"] {
+                width: 22px;
+                height: 22px;
+            }
+            .footer-actions button {
+                font-size: 13px;
+                padding: 10px 14px;
+                min-height: 44px;
+                min-width: 80px;
+            }
+            .scroll-top {
+                padding: 12px 14px;
+                font-size: 16px;
+                min-height: 48px;
+                min-width: 48px;
+                bottom: 14px;
+                right: 14px;
+            }
+            .set-title {
+                font-size: 17px;
+            }
+            .set-sub {
+                font-size: 13px;
+            }
+            .q-answer {
+                font-size: 13px;
+                padding: 8px 12px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .set-nav button {
+                font-size: 11px;
+                padding: 6px 10px;
+                min-width: 40px;
+            }
+            .q-card .q-en {
+                font-size: 14px;
+            }
+            .options label {
+                font-size: 13px;
+                padding: 10px 10px;
+            }
+        }
+
+        /* ===== UTILITY ===== */
+        .no-select {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div>
+                <h1>📘 TEC Assessment <span>All MCQs · Entrepreneurship &amp; Accounting</span></h1>
+            </div>
+            <div class="score-box">
+                <span>🎯</span> <span id="scoreDisplay">0</span> / <span id="totalDisplay">0</span>
+                <span style="margin-left:4px; font-weight:400; font-size:13px;">correct</span>
+            </div>
+        </div>
+
+        <!-- SET NAV -->
+        <div class="set-nav" id="setNav"></div>
+
+        <!-- SETS CONTAINER -->
+        <div id="setsContainer"></div>
+
+        <!-- FOOTER -->
+        <div class="footer-actions">
+            <button class="primary" id="resetBtn">🔄 Reset All</button>
+            <button id="showAllBtn">📖 Show Answers</button>
+            <button id="hideAllBtn">🙈 Hide Answers</button>
+        </div>
+        <div class="progress-text" id="progressText"></div>
+
+        <!-- SCROLL TOP -->
+        <button class="scroll-top" id="scrollTopBtn" aria-label="Scroll to top">⬆ Top</button>
+    </div>
+
+    <script>
+        // --------------------------------------------------------------
+        // DATA — all 68 questions with English, Hinglish, options, answers
+        // --------------------------------------------------------------
+        const setsData = [{
+            id: 1,
+            title: 'Entrepreneurship',
+            subtitle: 'Basic concepts, risk, startup success, and entrepreneurial activities.',
+            questions: [{
+                en: 'Which of the following is an example of entrepreneurship?',
+                hi: 'निम्नलिखित में से कौन सा उद्यमिता (entrepreneurship) का उदाहरण है?',
+                options: [
+                    'Starting a business based on an old idea, an existing business module, and low risk',
+                    'Teaching at an IIT/MBBS coaching center',
+                    'Starting a business based on a new app/software with high risk',
+                    'None of the above'
+                ],
+                answer: 0
+            }, {
+                en: 'An entrepreneur is a person who takes less risk and avoids experimentation.',
+                hi: 'एक उद्यमी (entrepreneur) वह व्यक्ति है जो कम जोखिम लेता है और प्रयोग (experimentation) से बचता है।',
+                options: ['True', 'False'],
+                answer: 1
+            }, {
+                en: 'An entrepreneur is involved in FEW of the following activities – management, organization, innovation, risk-taking, etc.',
+                hi: 'एक उद्यमी निम्नलिखित में से कुछ गतिविधियों में शामिल होता है – प्रबंधन, संगठन, नवाचार, जोखिम लेना आदि।',
+                options: ['True', 'False'],
+                answer: 0
+            }, {
+                en: 'Entrepreneurship is an opportunity to create wealth.',
+                hi: 'उद्यमिता (entrepreneurship) धन (wealth) बनाने का एक अवसर है।',
+                options: ['True', 'False'],
+                answer: 0
+            }, {
+                en: '92% of startups become successful within the first 3 years of starting.',
+                hi: '92% स्टार्टअप शुरू होने के पहले 3 सालों में सफल हो जाते हैं।',
+                options: ['True', 'False'],
+                answer: 1
+            }, {
+                en: 'Everyone who starts a business based on a new idea is always successful.',
+                hi: 'हर कोई जो नए आइडिया के आधार पर बिजनेस शुरू करता है, हमेशा सफल होता है।',
+                options: ['True', 'False'],
+                answer: 1
+            }, {
+                en: 'An entrepreneur performs the following activities – management, organization, and makes all decisions himself/herself.',
+                hi: 'एक उद्यमी निम्नलिखित गतिविधियाँ करता है – प्रबंधन, संगठन, और सभी निर्णय स्वयं लेता है।',
+                options: ['True', 'False'],
+                answer: 0
+            }, {
+                en: 'A successful entrepreneur can become rich very quickly.',
+                hi: 'एक सफल उद्यमी बहुत जल्दी अमीर (rich) बन सकता है।',
+                options: ['True', 'False'],
+                answer: 0
+            }]
+        }, {
+            id: 2,
+            title: 'Entrepreneurship &amp; Entrepreneurial Character',
+            subtitle: 'Patience, community, organization, and the entrepreneurial mindset.',
+            questions: [{
+                en: 'Entrepreneurs should not be greedy to grow big because it also requires patience.',
+                hi: 'उद्यमियों को बड़ा बनने के लिए लालची (greedy) नहीं होना चाहिए क्योंकि इसमें धैर्य (patience) भी चाहिए।',
+                options: ['True', 'False'],
+                answer: 0
+            }, {
+                en: 'Entrepreneurs need membership in physical communities where they can share ideas.',
+                hi: 'उद्यमियों को भौतिक समुदायों (physical communities) में सदस्यता चाहिए जहाँ वे विचार साझा कर सकें।',
+                options: ['True', 'False'],
+                answer: 0
+            }, {
+                en: 'To be successful, entrepreneurs must have ______.',
+                hi: 'सफल होने के लिए, उद्यमियों के पास ______ होना चाहिए।',
+                options: ['Patience', 'Patient', 'Money', 'Luck'],
+                answer: 0
+            }, {
+                en: 'An organization is not an entrepreneur, but people are entrepreneurs.',
+                hi: 'एक संगठन (organization) उद्यमी नहीं है, लेकिन लोग उद्यमी होते हैं।',
+                options: ['True', 'False'],
+                answer: 0
+            }, {
+                en: 'Building a business takes ______ time compared to generating an idea for the business.',
+                hi: 'बिजनेस बनाने में बिजनेस का आइडिया जनरेट करने की तुलना में ______ समय लगता है।',
+                options: ['Less/shorter', 'Equal', 'More/longer', 'Cannot say'],
+                answer: 2
+            }, {
+                en: 'Entrepreneurship involves organizing the management and handling of risks related to your venture, and an entrepreneur is someone who is also involved in all these activities.',
+                hi: 'उद्यमिता में प्रबंधन को व्यवस्थित करना और आपके उद्यम (venture) से जुड़े जोखिमों को संभालना शामिल है, और एक उद्यमी वह है जो इन सभी गतिविधियों में शामिल होता है।',
+                options: ['True', 'False'],
+                answer: 0
+            }]
+        }, {
+            id: 3,
+            title: 'Identifying Business Opportunities',
+            subtitle: 'Evaluating ideas, technical vs market knowledge, and customer needs.',
+            questions: [{
+                en: 'When evaluating whether an idea is an opportunity or not, upfront capital and R&D hiring costs should be high.',
+                hi: 'यह मूल्यांकन करते समय कि कोई आइडिया अवसर (opportunity) है या नहीं, अपफ्रंट कैपिटल और R&D हायरिंग लागत अधिक होनी चाहिए।',
+                options: ['True', 'False'],
+                answer: 1
+            }, {
+                en: 'Successful entrepreneurship requires the ability to balance technical knowledge and market knowledge.',
+                hi: 'सफल उद्यमिता के लिए तकनीकी ज्ञान (technical knowledge) और बाजार ज्ञान (market knowledge) को संतुलित करने की क्षमता चाहिए।',
+                options: ['True', 'False'],
+                answer: 0
+            }, {
+                en: 'How can you identify whether an idea is an opportunity or not?',
+                hi: 'आप कैसे पहचान सकते हैं कि कोई आइडिया अवसर (opportunity) है या नहीं?',
+                options: [
+                    'An idea needs to be made valuable',
+                    'An idea needs to fulfill a customer\'s need',
+                    'Both are correct',
+                    'None of the above'
+                ],
+                answer: 2
+            }]
+        }, {
+            id: 4,
+            title: 'Understanding Cost Structures',
+            subtitle: 'Direct labor, fixed costs, expense costs, and transformation degree.',
+            questions: [{
+                en: '_____ costs include salaries, bonuses, insurance, pension benefits, and accrued leave for the people involved.',
+                hi: '_____ लागत में वेतन (salaries), बोनस, बीमा, पेंशन लाभ और शामिल लोगों की accrued छुट्टी शामिल है।',
+                options: ['Additional', 'Direct material cost', 'Direct labor cost', 'Unexpected cost'],
+                answer: 0
+            }, {
+                en: '______ is the monetary value of resources such as materials, labor, and overheads that are used for producing or delivering a product or service.',
+                hi: '______ उन संसाधनों का मौद्रिक मूल्य (monetary value) है जैसे सामग्री, श्रम और ओवरहेड्स जो किसी उत्पाद या सेवा के उत्पादन या वितरण के लिए उपयोग किए जाते हैं।',
+                options: ['Input', 'Receipts', 'Inventory', 'Cost'],
+                answer: 3
+            }, {
+                en: 'Retail companies such as Reliance Fresh, D-Mart, and Big Bazaar have a ______ to ______ degree of transformation.',
+                hi: 'रिटेल कंपनियाँ जैसे Reliance Fresh, D-Mart और Big Bazaar में ______ से ______ तक ट्रांसफॉर्मेशन की डिग्री होती है।',
+                options: ['Low to medium', 'Medium to high', 'Bottom to top', 'High to medium'],
+                answer: 1
+            }, {
+                en: 'Costs that do not vary in the short term regardless of changes in the level of production are called ______ costs.',
+                hi: 'जो लागतें उत्पादन स्तर में बदलाव के बावजूद अल्पावधि (short term) में नहीं बदलतीं, उन्हें ______ लागत कहते हैं।',
+                options: ['Direct costs', 'Indirect costs', 'Fixed costs', 'Expense costs'],
+                answer: 2
+            }, {
+                en: '______ costs are those that have been completely consumed or are the benefits that the business has received.',
+                hi: '______ लागतें वे हैं जो पूरी तरह से खपत (consumed) हो चुकी हैं या वे लाभ हैं जो व्यवसाय को प्राप्त हुए हैं।',
+                options: ['Expense costs', 'Unexpected costs', 'Direct costs', 'Indirect costs'],
+                answer: 0
+            }, {
+                en: '______ is a major determinant of the cost of goods sold, which appears on the P&L statement.',
+                hi: '______ बेचे गए माल (cost of goods sold) का एक प्रमुख निर्धारक (determinant) है, जो P&L स्टेटमेंट पर दिखाई देता है।',
+                options: ['Indirect cost', 'Fixed cost', 'Expense cost', 'Cost of goods'],
+                answer: 3
+            }]
+        }, {
+            id: 5,
+            title: 'Long-Term Orientation',
+            subtitle: 'Creativity, risk-taking, goal orientation, prior knowledge, and persistence.',
+            questions: [{
+                en: 'Entrepreneurs are always looking for new ways to do things and how they can improve them. Which characteristic is being discussed here?',
+                hi: 'उद्यमी हमेशा काम करने के नए तरीकों और उन्हें कैसे बेहतर बनाया जाए, इसकी तलाश में रहते हैं। यहाँ किस विशेषता (characteristic) की चर्चा हो रही है?',
+                options: ['Optimistic nature', 'Consistency', 'Creativity', 'Commitment'],
+                answer: 2
+            }, {
+                en: 'What are the characteristics or traits of a successful entrepreneur?',
+                hi: 'एक सफल उद्यमी की विशेषताएँ (characteristics) या गुण (traits) क्या हैं?',
+                options: ['Risk-taker', 'Goal-oriented', 'Perseveres in uncertainty', 'All of the above'],
+                answer: 3
+            }, {
+                en: 'Why is it important to have prior knowledge or reliable expertise to become a successful entrepreneur?',
+                hi: 'सफल उद्यमी बनने के लिए पूर्व ज्ञान (prior knowledge) या विश्वसनीय विशेषज्ञता (expertise) होना क्यों महत्वपूर्ण है?',
+                options: [
+                    'Prior knowledge contributes to forming expectations',
+                    'It helps in making decisions such as whether or not to invest in an idea',
+                    'Prior knowledge does not help much and is not necessary to become a successful entrepreneur',
+                    'Both a and b'
+                ],
+                answer: 3
+            }, {
+                en: 'A successful tailor wanted to try something new. Therefore, he opened a street-food restaurant in his area. However, his restaurant did not run properly and eventually he had to close it. Why?',
+                hi: 'एक सफल दर्जी (tailor) ने कुछ नया करने की कोशिश की। उसने अपने इलाके में एक स्ट्रीट-फूड रेस्टोरेंट खोला। लेकिन उसका रेस्टोरेंट ठीक से नहीं चला और आखिरकार उसे बंद करना पड़ा। क्यों?',
+                options: [
+                    'He was not a risk-taker',
+                    'He was not goal-oriented',
+                    'He did not have prior knowledge of running a restaurant',
+                    'None of the above'
+                ],
+                answer: 2
+            }, {
+                en: 'Entrepreneurs effectively sell their products or services to customers. Which characteristic is being discussed here?',
+                hi: 'उद्यमी अपने उत्पादों या सेवाओं को ग्राहकों को प्रभावी ढंग से बेचते हैं। यहाँ किस विशेषता (characteristic) की चर्चा हो रही है?',
+                options: ['Optimistic nature', 'Goal-oriented', 'Communication skills', 'Creativity'],
+                answer: 2
+            }, {
+                en: 'Which is NOT a characteristic of a successful entrepreneur?',
+                hi: 'एक सफल उद्यमी की कौन सी विशेषता (characteristic) नहीं है?',
+                options: [
+                    'Good communication skills',
+                    'Strong technical knowledge',
+                    'Gives up halfway when the situation becomes difficult',
+                    'Solves a problem with a unique and creative solution'
+                ],
+                answer: 2
+            }, {
+                en: 'A knowledgeable cook opened a South Indian restaurant in Chennai. However, the business was not running smoothly and later had to be closed. What went wrong?',
+                hi: 'एक जानकार कुक (cook) ने चेन्नई में एक साउथ इंडियन रेस्टोरेंट खोला। लेकिन बिजनेस ठीक से नहीं चला और बाद में बंद करना पड़ा। क्या गलत हुआ?',
+                options: [
+                    'He did not have technical knowledge',
+                    'There was too much competition and he was not creative with the menu to attract customers',
+                    'Both a and b',
+                    'None of the above'
+                ],
+                answer: 2
+            }]
+        }, {
+            id: 6,
+            title: 'Recording Business Transactions',
+            subtitle: 'Financial statements, accrual basis, balance sheet, and double-entry system.',
+            questions: [{
+                en: 'What are the three financial statements that a business records and reports?',
+                hi: 'एक व्यवसाय (business) द्वारा रिकॉर्ड और रिपोर्ट की जाने वाली तीन वित्तीय स्टेटमेंट (financial statements) कौन सी हैं?',
+                options: [
+                    'Balance Sheet, General Journal, Profit and Loss Statement',
+                    'Balance Sheet, Cash Flow Statement, Ledger',
+                    'Cash Flow Statement, General Journal, Ledger',
+                    'Cash Flow Statement, Balance Sheet, Profit and Loss Statement'
+                ],
+                answer: 3
+            }, {
+                en: 'Geeta owns a grocery store; customers have already paid her ₹5,000. Geeta decides to pay her supplier ₹2,000 at the end of the week. According to the accrual basis, her profit is calculated as:',
+                hi: 'Geeta के पास एक किराना स्टोर है; ग्राहकों ने उसे ₹5,000 पहले ही दे दिए हैं। Geeta सप्ताह के अंत में अपने सप्लायर को ₹2,000 देने का फैसला करती है। एक्रुअल बेसिस (accrual basis) के अनुसार, उसका लाभ (profit) क्या होगा?',
+                options: ['0', '3000', '300', '5000'],
+                answer: 1
+            }, {
+                en: 'A balance sheet is a record of all the income of a business and costs above a certain amount.',
+                hi: 'बैलेंस शीट (balance sheet) किसी व्यवसाय की सभी आय (income) और एक निश्चित राशि से अधिक लागतों का रिकॉर्ड है।',
+                options: ['True', 'False'],
+                answer: 0
+            }, {
+                en: '______ is a record of all the existing assets, liabilities, and equity of a business.',
+                hi: '______ किसी व्यवसाय की सभी मौजूदा संपत्तियों (assets), देनदारियों (liabilities) और इक्विटी (equity) का रिकॉर्ड है।',
+                options: ['Profit and Loss Statement', 'Cash Flow Statement', 'Balance Sheet', 'General Journal'],
+                answer: 2
+            }, {
+                en: 'Equity and liabilities come first in a balance sheet, followed by assets.',
+                hi: 'बैलेंस शीट (balance sheet) में पहले इक्विटी (equity) और देनदारियाँ (liabilities) आती हैं, उसके बाद संपत्तियाँ (assets) आती हैं।',
+                options: ['True', 'False'],
+                answer: 0
+            }, {
+                en: 'Select the correct equation.',
+                hi: 'सही समीकरण (equation) चुनें।',
+                options: [
+                    'Total Assets = Total Liabilities + Equity',
+                    'Total Liabilities = Total Assets + Equity',
+                    'Total Equity = Total Assets + Total Liabilities',
+                    'Total Equity = Total Liabilities + Total Assets'
+                ],
+                answer: 0
+            }, {
+                en: 'Transactions are recorded in chronological order in the general journal.',
+                hi: 'जनरल जर्नल (general journal) में लेन-देन (transactions) कालानुक्रमिक (chronological) क्रम में दर्ज किए जाते हैं।',
+                options: ['True', 'False'],
+                answer: 0
+            }, {
+                en: 'A business cannot survive for a long time without ______.',
+                hi: 'एक व्यवसाय ______ के बिना लंबे समय तक नहीं चल सकता।',
+                options: ['Workforce', 'Cash', 'Land arrangement', 'None'],
+                answer: 1
+            }, {
+                en: 'Accountants around the world use the double-entry system to record transactions.',
+                hi: 'दुनिया भर के एकाउंटेंट (accountants) लेन-देन (transactions) रिकॉर्ड करने के लिए डबल-एंट्री सिस्टम (double-entry system) का उपयोग करते हैं।',
+                options: ['True', 'False'],
+                answer: 0
+            }]
+        }, {
+            id: 7,
+            title: 'Basic Financial Terms',
+            subtitle: 'Accounting, investments, business outputs, finance, corporation, and business forms.',
+            questions: [{
+                en: 'Identify a non-example of accounting.',
+                hi: 'अकाउंटिंग (accounting) का एक गैर-उदाहरण (non-example) पहचानें।',
+                options: [
+                    'The value in rupees of goods or services sold by the business',
+                    'A list of investments made in land, facilities, buildings, etc.',
+                    'Expenses incurred in the business',
+                    'A list and details of preferred customers'
+                ],
+                answer: 3
+            }, {
+                en: 'What are the major investment items of a business?',
+                hi: 'एक व्यवसाय के प्रमुख निवेश (investment) आइटम क्या हैं?',
+                options: ['Labor', 'Land', 'Capital', 'All of the above'],
+                answer: 3
+            }, {
+                en: 'What is the output of a business?',
+                hi: 'एक व्यवसाय का आउटपुट (output) क्या है?',
+                options: ['Goods', 'Services', 'Both of the above', 'None of the above'],
+                answer: 2
+            }, {
+                en: '______ is about planning for an uncertain future and deciding what type of investment the business should make.',
+                hi: '______ एक अनिश्चित भविष्य (uncertain future) के लिए योजना बनाना और यह तय करना है कि व्यवसाय को किस प्रकार का निवेश (investment) करना चाहिए।',
+                options: ['Finance', 'Governance', 'Maintenance', 'Impact'],
+                answer: 0
+            }, {
+                en: 'What is a corporation?',
+                hi: 'कॉर्पोरेशन (corporation) क्या है?',
+                options: [
+                    'A separate legal entity with a large number of owners',
+                    'A separate illegal entity with a large number of owners',
+                    'Several owners or partners, some of whom are also responsible for the day-to-day running of the business',
+                    'All of the above'
+                ],
+                answer: 2
+            }, {
+                en: 'What is the primary purpose of a business?',
+                hi: 'एक व्यवसाय का मुख्य उद्देश्य (primary purpose) क्या है?',
+                options: [
+                    'Make money for investors by providing goods or services',
+                    'Make money for retailers by providing goods or services',
+                    'Make money for customers by providing goods or services',
+                    'Make money for employees by providing goods or services'
+                ],
+                answer: 0
+            }, {
+                en: 'What are the different forms of business?',
+                hi: 'व्यवसाय के विभिन्न रूप (forms of business) क्या हैं?',
+                options: [
+                    'Sole proprietorship, friendship, corporation',
+                    'Sole proprietorship, partnership, corporation',
+                    'Sole proprietorship, partnership, memorial ceremony',
+                    'Sole chairman, partnership, memorial ceremony'
+                ],
+                answer: 1
+            }, {
+                en: '______ has several owners or partners, some of whom are also responsible for the day-to-day running of the business.',
+                hi: '______ में कई मालिक (owners) या पार्टनर (partners) होते हैं, जिनमें से कुछ व्यवसाय के दिन-प्रतिदिन के कामकाज के लिए भी जिम्मेदार होते हैं।',
+                options: ['Friendship', 'Chairmanship', 'Partnership', 'Corporation'],
+                answer: 3
+            }, {
+                en: 'What is sole proprietorship?',
+                hi: 'एकल स्वामित्व (sole proprietorship) क्या है?',
+                options: [
+                    'A single owner who is usually responsible for the day-to-day business',
+                    'A single employee who is usually responsible for the day-to-day business',
+                    'A single seller who is usually responsible for the day-to-day business',
+                    'A single partner who is usually responsible for the day-to-day business'
+                ],
+                answer: 0
+            }]
+        }, {
+            id: 8,
+            title: 'Accounting &amp; Business Reporting',
+            subtitle: 'Retained earnings, current/non-current assets, balance sheet, and P&L statement.',
+            questions: [{
+                en: 'Income or profit that has not been paid to shareholders is called ______.',
+                hi: 'शेयरधारकों (shareholders) को न चुकाई गई आय (income) या लाभ (profit) को ______ कहते हैं।',
+                options: ['Retained earnings', 'Revenue', 'Debenture', 'Surplus'],
+                answer: 0
+            }, {
+                en: 'Both assets and liabilities are classified as current and non-current.',
+                hi: 'संपत्तियाँ (assets) और देनदारियाँ (liabilities) दोनों को करंट (current) और नॉन-करंट (non-current) के रूप में वर्गीकृत (classified) किया जाता है।',
+                options: ['True', 'False'],
+                answer: 0
+            }, {
+                en: 'A balance sheet is divided into two parts.',
+                hi: 'बैलेंस शीट (balance sheet) दो भागों में विभाजित (divided) होती है।',
+                options: ['Assets and liabilities', 'Assets and liabilities', 'Equity and assets', 'None of the above'],
+                answer: 1
+            }, {
+                en: 'Non-current assets include ______, which generally lasts for more than one year.',
+                hi: 'नॉन-करंट एसेट्स (non-current assets) में ______ शामिल होते हैं, जो आम तौर पर एक वर्ष से अधिक समय तक चलते हैं।',
+                options: ['Plant, property and installation', 'Plant, property and equipment', 'Pencant, property, equipment',
+                    'Plant, property, experiment'
+                ],
+                answer: 1
+            }, {
+                en: '______ is also called the income statement.',
+                hi: '______ को इनकम स्टेटमेंट (income statement) भी कहा जाता है।',
+                options: ['Cash inflow statement', 'Profit and Loss Statement', 'Balance Sheet', 'General Journal'],
+                answer: 1
+            }, {
+                en: 'What are the common types of current assets?',
+                hi: 'करंट एसेट्स (current assets) के सामान्य प्रकार क्या हैं?',
+                options: [
+                    'Cash, inventory, deliverables, long-term loans and advances',
+                    'Tangible assets, intangible assets, non-current investments',
+                    'Cash, inventory, intangible assets, non-current investments',
+                    'Cash, inventory, receivables, short-term loans and advances'
+                ],
+                answer: 3
+            }, {
+                en: 'The ______ Sheet represents the financial position of a business on a particular date, usually at the end of a quarter or financial year.',
+                hi: '______ शीट (Sheet) किसी व्यवसाय की एक विशेष तारीख पर वित्तीय स्थिति (financial position) को दर्शाती है, आमतौर पर तिमाही (quarter) या वित्तीय वर्ष (financial year) के अंत में।',
+                options: ['Cash inflow statement', 'Profit and Loss Statement', 'Balance Sheet', 'Ledger Sheet'],
+                answer: 2
+            }, {
+                en: '______ are assets that are expected to be sold, converted into cash, or consumed within one year.',
+                hi: '______ वे संपत्तियाँ (assets) हैं जिन्हें एक वर्ष के भीतर बेचे जाने, नकद (cash) में परिवर्तित किए जाने या उपभोग (consumed) किए जाने की उम्मीद होती है।',
+                options: ['Current assets', 'Current liabilities', 'Non-current assets', 'Non-current liabilities'],
+                answer: 0
+            }, {
+                en: '______ is the value of raw materials that are in the work-in-progress stage and are held by the business.',
+                hi: '______ उन कच्चे माल (raw materials) का मूल्य (value) है जो वर्क-इन-प्रोग्रेस (work-in-progress) स्टेज में हैं और व्यवसाय के पास हैं।',
+                options: ['Additional', 'Revenue', 'Debenture', 'Surplus'],
+                answer: 0
+            }]
+        }, {
+            id: 9,
+            title: 'Marketing Education: Handling Questions &amp; Concerns',
+            subtitle: 'Trusted advisor, customer needs, listening types, service promises, and sales pitch.',
+            questions: [{
+                en: 'How can you become a trusted advisor?',
+                hi: 'आप एक trusted advisor (विश्वसनीय सलाहकार) कैसे बन सकते हैं?',
+                options: [
+                    'Understand the customer\'s concerns',
+                    'Promote the product',
+                    'Both are correct',
+                    'None is correct'
+                ],
+                answer: 2
+            }, {
+                en: 'Why should we identify customers\' needs?',
+                hi: 'हमें ग्राहकों की ज़रूरतों (needs) की पहचान क्यों करनी चाहिए?',
+                options: [
+                    'It is necessary to motivate a customer to buy something',
+                    'It ensures customer satisfaction and loyalty',
+                    'Both are correct',
+                    'None is correct'
+                ],
+                answer: 2
+            }, {
+                en: 'Listening for pleasure is called ______.',
+                hi: 'आनंद (pleasure) के लिए सुनना ______ कहलाता है।',
+                options: ['Appreciative listening', 'Artistic listening', 'Inspirational listening',
+                    'Experiential listening'],
+                answer: 0
+            }, {
+                en: 'A service promise is an assurance given to the customer about the timely delivery of the product with assured ______ and ______.',
+                hi: 'सर्विस प्रॉमिस (service promise) ग्राहक को उत्पाद की समय पर डिलीवरी के साथ ______ और ______ का आश्वासन (assurance) है।',
+                options: ['Integrity and accuracy', 'Honesty and specialty', 'Quantity and quality',
+                    'Variety and guarantee'],
+                answer: 2
+            }, {
+                en: 'A trusted advisor aggressively promotes a product to the customer.',
+                hi: 'एक trusted advisor (विश्वसनीय सलाहकार) ग्राहक को उत्पाद का आक्रामक (aggressively) प्रचार (promote) करता है।',
+                options: ['True', 'False'],
+                answer: 1
+            }, {
+                en: 'Innovating products based on customers\' needs is valuable for a business.',
+                hi: 'ग्राहकों की ज़रूरतों (needs) के आधार पर उत्पादों में नवाचार (innovation) करना व्यवसाय के लिए मूल्यवान (valuable) है।',
+                options: ['True', 'False'],
+                answer: 0
+            }, {
+                en: 'One of the promises of customer service is to deliver what the customer wants.',
+                hi: 'ग्राहक सेवा (customer service) के वादों (promises) में से एक है ग्राहक को वह देना जो वह चाहता है।',
+                options: ['True', 'False'],
+                answer: 0
+            }, {
+                en: 'Select the correct structure of a good sales pitch.',
+                hi: 'एक अच्छे सेल्स पिच (sales pitch) की सही संरचना (structure) चुनें।',
+                options: ['Hook and purpose', 'Rook and purpose', 'Rook and subject', 'Corner and subject'],
+                answer: 0
+            }]
+        }, {
+            id: 10,
+            title: 'Marketing Education: Value',
+            subtitle: 'Customer value, value framework (Creation → Delivery → Capture).',
+            questions: [{
+                en: 'Why is a customer shopping from a particular store?',
+                hi: 'एक ग्राहक किसी विशेष स्टोर (store) से खरीदारी (shopping) क्यों करता है?',
+                options: [
+                    'Because the customer values the AC provided inside the store',
+                    'Because the customer values the product or service provided by the store',
+                    'Because the customer values friendship with the store owner',
+                    'All of the above'
+                ],
+                answer: 1
+            }, {
+                en: 'According to the value framework for entrepreneurs, select the best statement given below.',
+                hi: 'उद्यमियों के लिए वैल्यू फ्रेमवर्क (value framework) के अनुसार, नीचे दिए गए सर्वश्रेष्ठ कथन (statement) का चयन करें।',
+                options: [
+                    'Value Creation > Value Delivery > Value Capture',
+                    'Value Capture > Value Creation > Value Delivery',
+                    'Value Creation > Value Capture > Value Delivery',
+                    'Value Delivery > Value Creation > Value Capture'
+                ],
+                answer: 0
+            }, {
+                en: 'Select the correct statement.',
+                hi: 'सही कथन (statement) चुनें।',
+                options: [
+                    'Value depends on the facilities or services provided by the store',
+                    'Value depends on the facilities or services sold by the seller',
+                    'Value depends on the facilities or services discounted by the store owner',
+                    'Value depends on the facilities or services consumed by the customer'
+                ],
+                answer: 3
+            }]
+        }];
+
+        // --------------------------------------------------------------
+        // RENDER ENGINE
+        // --------------------------------------------------------------
+        const setsContainer = document.getElementById('setsContainer');
+        const setNav = document.getElementById('setNav');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const totalDisplay = document.getElementById('totalDisplay');
+        const progressText = document.getElementById('progressText');
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+        let allQuestions = [];
+        let totalQuestions = 0;
+        let answeredCorrect = 0;
+        let answeredQuestions = new Set();
+
+        // Flatten
+        setsData.forEach(set => {
+            set.questions.forEach((q, idx) => {
+                allQuestions.push({
+                    setId: set.id,
+                    setTitle: set.title,
+                    qIdx: idx,
+                    ...q
+                });
+            });
+        });
+        totalQuestions = allQuestions.length;
+        totalDisplay.textContent = totalQuestions;
+
+        // Build nav
+        setsData.forEach(set => {
+            const btn = document.createElement('button');
+            btn.textContent = `Set ${set.id}`;
+            btn.dataset.setId = set.id;
+            btn.addEventListener('click', () => switchSet(set.id));
+            setNav.appendChild(btn);
+        });
+
+        // Build sections
+        setsData.forEach(set => {
+            const section = document.createElement('div');
+            section.className = 'set-section';
+            section.id = `set-${set.id}`;
+
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'set-title';
+            titleDiv.innerHTML =
+                `Set ${set.id} — ${set.title} <span class="badge">${set.questions.length} Q</span>`;
+            section.appendChild(titleDiv);
+
+            const subDiv = document.createElement('div');
+            subDiv.className = 'set-sub';
+            subDiv.textContent = set.subtitle;
+            section.appendChild(subDiv);
+
+            set.questions.forEach((q, idx) => {
+                const globalIdx = allQuestions.findIndex(aq =>
+                    aq.setId === set.id && aq.qIdx === idx
+                );
+                const card = document.createElement('div');
+                card.className = 'q-card';
+                card.id = `q-${globalIdx}`;
+
+                // Head
+                const head = document.createElement('div');
+                head.className = 'q-head';
+                const numSpan = document.createElement('span');
+                numSpan.className = 'q-num';
+                numSpan.textContent = `Q${globalIdx + 1}`;
+                const statusSpan = document.createElement('span');
+                statusSpan.className = 'q-status';
+                statusSpan.id = `status-${globalIdx}`;
+                head.appendChild(numSpan);
+                head.appendChild(statusSpan);
+                card.appendChild(head);
+
+                // English
+                const enP = document.createElement('div');
+                enP.className = 'q-en';
+                enP.textContent = q.en;
+                card.appendChild(enP);
+
+                // Hinglish
+                const hiP = document.createElement('div');
+                hiP.className = 'q-hi';
+                hiP.textContent = q.hi;
+                card.appendChild(hiP);
+
+                // Options
+                const optContainer = document.createElement('div');
+                optContainer.className = 'options';
+                const letters = ['a', 'b', 'c', 'd'];
+                q.options.forEach((opt, oi) => {
+                    const label = document.createElement('label');
+                    label.className = 'opt-label';
+                    label.id = `opt-${globalIdx}-${oi}`;
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = `q-${globalIdx}`;
+                    radio.value = oi;
+                    radio.dataset.globalIdx = globalIdx;
+                    radio.addEventListener('change', () => handleAnswer(globalIdx, oi));
+                    const span = document.createElement('span');
+                    span.textContent = `${letters[oi]}) ${opt}`;
+                    label.appendChild(radio);
+                    label.appendChild(span);
+                    optContainer.appendChild(label);
+                });
+                card.appendChild(optContainer);
+
+                // Answer reveal
+                const ansDiv = document.createElement('div');
+                ansDiv.className = 'q-answer';
+                ansDiv.id = `ans-${globalIdx}`;
+                const ansLabel = document.createElement('span');
+                ansLabel.className = 'ans-label';
+                const ansText = document.createElement('span');
+                ansText.id = `ans-text-${globalIdx}`;
+                ansDiv.appendChild(ansLabel);
+                ansDiv.appendChild(ansText);
+                card.appendChild(ansDiv);
+
+                section.appendChild(card);
+            });
+
+            setsContainer.appendChild(section);
+        });
+
+        // Activate first set
+        switchSet(1);
+
+        // --------------------------------------------------------------
+        // CORE FUNCTIONS
+        // --------------------------------------------------------------
+        function switchSet(id) {
+            document.querySelectorAll('.set-section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.set-nav button').forEach(el => el.classList.remove('active'));
+            document.getElementById(`set-${id}`).classList.add('active');
+            const btn = document.querySelector(`.set-nav button[data-set-id="${id}"]`);
+            if (btn) btn.classList.add('active');
+            // scroll to set top
+            const el = document.getElementById(`set-${id}`);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function handleAnswer(globalIdx, selected) {
+            const q = allQuestions[globalIdx];
+            const card = document.getElementById(`q-${globalIdx}`);
+            const statusEl = document.getElementById(`status-${globalIdx}`);
+            const ansDiv = document.getElementById(`ans-${globalIdx}`);
+            const ansText = document.getElementById(`ans-text-${globalIdx}`);
+
+            card.classList.remove('correct', 'wrong');
+            document.querySelectorAll(`#q-${globalIdx} .opt-label`).forEach(el => {
+                el.classList.remove('correct-opt', 'wrong-opt', 'disabled-opt');
+            });
+
+            document.querySelectorAll(`#q-${globalIdx} input[type="radio"]`).forEach(r => r.disabled = true);
+
+            const isCorrect = (selected === q.answer);
+            const letter = ['a', 'b', 'c', 'd'][q.answer];
+
+            const correctLabel = document.getElementById(`opt-${globalIdx}-${q.answer}`);
+            if (correctLabel) correctLabel.classList.add('correct-opt');
+
+            if (!isCorrect) {
+                const wrongLabel = document.getElementById(`opt-${globalIdx}-${selected}`);
+                if (wrongLabel) wrongLabel.classList.add('wrong-opt');
+                card.classList.add('wrong');
+                statusEl.innerHTML = `<span class="icon">❌</span> Wrong`;
+            } else {
+                card.classList.add('correct');
+                statusEl.innerHTML = `<span class="icon">✅</span> Correct`;
+            }
+
+            ansDiv.className = `q-answer show ${isCorrect ? 'correct-ans' : 'wrong-ans'}`;
+            ansText.textContent = `Correct answer: ${letter}) ${q.options[q.answer]}`;
+
+            if (!answeredQuestions.has(globalIdx)) {
+                answeredQuestions.add(globalIdx);
+                if (isCorrect) answeredCorrect++;
+            }
+            updateScore();
+        }
+
+        function updateScore() {
+            let correct = 0;
+            answeredQuestions.forEach(idx => {
+                const q = allQuestions[idx];
+                const selectedRadio = document.querySelector(`#q-${idx} input[type="radio"]:checked`);
+                if (selectedRadio) {
+                    const val = parseInt(selectedRadio.value);
+                    if (val === q.answer) correct++;
+                }
+            });
+            answeredCorrect = correct;
+            scoreDisplay.textContent = answeredCorrect;
+            const pct = totalQuestions > 0 ? Math.round((answeredCorrect / totalQuestions) * 100) : 0;
+            progressText.textContent = `${answeredCorrect} / ${totalQuestions} correct  ·  ${pct}%`;
+        }
+
+        function resetAll() {
+            document.querySelectorAll('input[type="radio"]').forEach(r => {
+                r.checked = false;
+                r.disabled = false;
+            });
+            document.querySelectorAll('.q-card').forEach(c => {
+                c.classList.remove('correct', 'wrong');
+            });
+            document.querySelectorAll('.opt-label').forEach(el => {
+                el.classList.remove('correct-opt', 'wrong-opt', 'disabled-opt');
+            });
+            document.querySelectorAll('.q-answer').forEach(el => {
+                el.className = 'q-answer';
+            });
+            document.querySelectorAll('.q-status').forEach(el => {
+                el.innerHTML = '';
+            });
+            answeredQuestions.clear();
+            answeredCorrect = 0;
+            updateScore();
+            document.querySelectorAll('input[type="radio"]').forEach(r => r.disabled = false);
+        }
+
+        function showAllAnswers() {
+            allQuestions.forEach((q, idx) => {
+                const ansDiv = document.getElementById(`ans-${idx}`);
+                const ansText = document.getElementById(`ans-text-${idx}`);
+                const letter = ['a', 'b', 'c', 'd'][q.answer];
+                ansDiv.className = 'q-answer show correct-ans';
+                ansText.textContent = `Correct answer: ${letter}) ${q.options[q.answer]}`;
+                const correctLabel = document.getElementById(`opt-${idx}-${q.answer}`);
+                if (correctLabel) correctLabel.classList.add('correct-opt');
+                document.querySelectorAll(`#q-${idx} input[type="radio"]`).forEach(r => r.disabled = true);
+                const statusEl = document.getElementById(`status-${idx}`);
+                statusEl.innerHTML = `<span class="icon">📖</span> Revealed`;
+            });
+        }
+
+        function hideAllAnswers() {
+            allQuestions.forEach((q, idx) => {
+                if (!answeredQuestions.has(idx)) {
+                    const ansDiv = document.getElementById(`ans-${idx}`);
+                    ansDiv.className = 'q-answer';
+                    document.querySelectorAll(`#q-${idx} .opt-label`).forEach(el => {
+                        el.classList.remove('correct-opt', 'wrong-opt');
+                    });
+                    document.querySelectorAll(`#q-${idx} input[type="radio"]`).forEach(r => r.disabled = false);
+                    document.getElementById(`status-${idx}`).innerHTML = '';
+                }
+            });
+        }
+
+        // --------------------------------------------------------------
+        // EVENT BINDINGS
+        // --------------------------------------------------------------
+        document.getElementById('resetBtn').addEventListener('click', resetAll);
+        document.getElementById('showAllBtn').addEventListener('click', showAllAnswers);
+        document.getElementById('hideAllBtn').addEventListener('click', hideAllAnswers);
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Keyboard shortcut: Escape to reset
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') resetAll();
+        });
+
+        // Init
+        updateScore();
+        console.log('✅ TEC Assessment loaded. Total questions:', totalQuestions);
+    </script>
+
+</body>
+</html>
